@@ -37,7 +37,7 @@ export default function Home() {
   const totalCards = 169;
   const remainingCardsCount = totalCards - selectedCards.length;
   const totalCardsArr = Array.from({ length: totalCards }, (_, index) => index + 1);
-  const unselectedCards = totalCardsArr.filter((card) => !selectedCards.includes(card));
+  const unselectedCards = totalCardsArr.filter((_, index) => !selectedCards.includes(index));
 
   return (
     <div
