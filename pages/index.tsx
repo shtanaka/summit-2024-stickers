@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import { useEffect, useState } from "react";
 
@@ -64,6 +65,7 @@ export default function Home() {
           <div className="">Missing Cards: {unselectedCards.join(", ")}</div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
