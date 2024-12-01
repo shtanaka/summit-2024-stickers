@@ -34,21 +34,36 @@ export default function Home() {
     localStorage.setItem("selectedCards", JSON.stringify(selectedCards));
   }, [selectedCards]);
 
+  const totalCards = 169;
+  const remainingCardsCount = totalCards - selectedCards.length;
+  const totalCardsArr = Array.from({ length: totalCards }, (_, index) => index + 1);
+  const unselectedCards = totalCardsArr.filter((card) => !selectedCards.includes(card));
+
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} w-full font-[family-name:var(--font-geist-sans)] flex items-center justify-center p-4`}
+      className={`${geistSans.variable} ${geistMono.variable} w-full font-[family-name:var(--font-geist-sans)] flex flex-col items-center justify-center p-4`}
     >
       <main className="w-full border-4 border-green-500 grid grid-cols-6 gap-4 p-4">
-        {Array.from({ length: 169 }, (_, index) => (
+        {totalCardsArr.map((cardLabel, index) => (
           <div
             onClick={() => toggleCard(index)}
             key={index}
-            className={`p-2 flex items-center justify-center border border-gray-300${selectedCards.includes(index) ? " bg-white text-black" : ""}`}
+            className={`p-2 flex items-center justify-center border border-gray-300${
+              selectedCards.includes(index) ? " bg-white text-black" : ""
+            }`}
           >
-            {index + 1}
+            {cardLabel}
           </div>
         ))}
       </main>
+      <footer className="w-full border-4 border-green-500 grid grid-cols-1 gap-4 p-4">
+        <div className="flex items-center justify-center px-4">
+          <div className="">Missing Count: {remainingCardsCount}</div>
+        </div>
+        <div className="flex items-center justify-center p-4">
+          <div className="">Missing Cards: {unselectedCards.join(", ")}</div>
+        </div>
+      </footer>
     </div>
   );
 }
